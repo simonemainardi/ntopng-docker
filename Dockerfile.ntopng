@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 MAINTAINER Simone Mainardi <mainardi@ntop.org>
 
 RUN apt-get update && \
-    apt-get -y install wget lsb-release sudo zip less net-tools telnet && \
+    apt-get -y install wget lsb-release sudo zip less net-tools telnet curl && \
     wget http://apt.ntop.org/16.04/all/apt-ntop.deb && \
     dpkg -i apt-ntop.deb && \
     apt-get update && \

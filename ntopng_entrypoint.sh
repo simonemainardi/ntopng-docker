@@ -37,7 +37,6 @@ function malware_traffic_analysis {
     exec bash
 }
 
-
 if [ "$1" = 'malware-traffic-analysis' ]; then
     if [ "$#" -lt 2 ]; then
 	echo -e "Please provide an url as second parameter to download zip files. Example"
@@ -50,6 +49,18 @@ if [ "$1" = 'malware-traffic-analysis' ]; then
 elif [ "$1" = 'shell' ]; then
     echo -e "Enterning ntopng container in shell (interactive) mode"
     exec bash
+elif [ "$1" = 'workspace' ]; then
+    echo -e "Binding workspace directories..."
+    #ln -s /home/ntopng/workspace/scripts /usr/share/ntopng/scripts/lua/scripts
+    rm -f /home/ntopng/workspace/scripts/lua/myscripts
+    cp -r /usr/share/ntopng/scripts /home/ntopng/workspace/scripts
+    ln -s /home/ntopng/workspace/myscripts /home/ntopng/workspace/scripts/lua/myscripts
+    chown -R ntopng:ntopng /home/ntopng/workspace/scripts
+    #cp -r /usr/share/ntopng/httpdocs /home/ntopng/workspace/httpdocs
+
+    echo "Starting ntopng..."
+    su -c "ntopng -2 /home/ntopng/workspace/scripts -i workspace/sample_malware_sites.pcap --community --disable-login 1" ntopng
+    #exec bash
 else
     # can use this to run ntopng in the background for example
     exec "$@"
