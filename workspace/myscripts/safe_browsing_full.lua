@@ -46,7 +46,8 @@ end
 -- Build the request
 local request = {
   threatInfo = {
-    threatTypes = { "MALWARE", "SOCIAL_ENGINEERING", "POTENTIALLY_HARMFUL_APPLICATION", "UNWANTED_SOFTWARE"},
+    threatTypes = { "MALWARE", "SOCIAL_ENGINEERING",
+      "POTENTIALLY_HARMFUL_APPLICATION", "UNWANTED_SOFTWARE"},
     platformTypes = { "WINDOWS", },
     threatEntryTypes = { "URL", },
     threatEntries = urls, -- the URL to check
@@ -70,7 +71,7 @@ local response = json.decode(response_data)
 
 if (response ~= nil) and (response.matches ~= nil) then
   print("<h2>Malware sites detected</h2>")
-  print("<textarea style='width: 500px; height: 150px;'>")
+  print("<pre>")
 
   for _, match in pairs(response.matches) do
     print(match.threat.url .. " : " .. match.threatType)
@@ -89,7 +90,8 @@ if (response ~= nil) and (response.matches ~= nil) then
             name = host.name
           end
 
-          print(" contacted by " .. host.name .. " (" .. discover.devtype2string(host.devtype) .. ")")
+          print(" contacted by " .. host.name .. " (" ..
+            discover.devtype2string(host.devtype) .. ")")
         end
       end
     end
@@ -97,7 +99,7 @@ if (response ~= nil) and (response.matches ~= nil) then
     print("\n")
   end
 
-  print("</textarea>")
+  print("</pre>")
 else
   print("<h2>No malware sites found</h2>")
 end
