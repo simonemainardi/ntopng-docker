@@ -36,7 +36,7 @@ local flows = interface.getFlowsInfo(nil, {
 
 --tprint(flows)
 
--- Add URLS
+-- URL to check
 local urls = {}
 
 for _, flow in pairs(flows.flows) do

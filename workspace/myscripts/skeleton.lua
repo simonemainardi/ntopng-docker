@@ -7,6 +7,10 @@ sendHTTPContentTypeHeader('text/html')
 ntop.dumpFile(dirs.installdir .. "/httpdocs/inc/header.inc")
 dofile(dirs.installdir .. "/scripts/lua/inc/menu.lua")
 
+-- *****************************************************************************
+
 -- You content here
+
+-- *****************************************************************************
 
 dofile(dirs.installdir .. "/scripts/lua/inc/footer.lua")
