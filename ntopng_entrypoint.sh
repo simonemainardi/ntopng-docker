@@ -58,6 +58,8 @@ elif [ "$1" = 'workspace' ]; then
     chown -R ntopng:ntopng /home/ntopng/workspace/scripts
     #cp -r /usr/share/ntopng/httpdocs /home/ntopng/workspace/httpdocs
 
+    su -c "redis-cli hset ntopng.host_labels 172.17.0.2 DEKSTOP-ULJ721" ntopng
+
     echo "Starting ntopng..."
     su -c "ntopng -2 /home/ntopng/workspace/scripts -i workspace/sample_malware_sites.pcap --community --disable-login 1" ntopng
     #exec bash

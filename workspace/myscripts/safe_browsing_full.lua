@@ -6,9 +6,6 @@ require "lua_utils"
 -- json library
 local json = require "dkjson"
 
--- host discovery utils
-local discover = require "discover_utils"
-
 sendHTTPContentTypeHeader('text/html')
 ntop.dumpFile(dirs.installdir .. "/httpdocs/inc/header.inc")
 dofile(dirs.installdir .. "/scripts/lua/inc/menu.lua")
@@ -90,8 +87,7 @@ if (response ~= nil) and (response.matches ~= nil) then
             name = host.name
           end
 
-          print(" contacted by " .. host.name .. " (" ..
-            discover.devtype2string(host.devtype) .. ")")
+          print(" contacted by " .. name)
         end
       end
     end
